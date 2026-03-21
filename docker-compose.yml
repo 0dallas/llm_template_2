@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development        # Cambia a 'production' para prod local
+    container_name: my_genai_app_dev
+    ports:
+      - "${PORT:-8000}:8000"
+    volumes:
+      - ./src:/app/src            # Hot-reload en desarrollo
+    env_file:
+      - .env
+    environment:
+      - ENVIRONMENT=development
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+networks:
+  default:
+    name: my_genai_app_network
