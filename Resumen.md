@@ -69,11 +69,22 @@ cp .env.example .env
 # 5. Verificar que los tests pasan
 pytest
 
-# 6. Verificar linting
+# 6. Verificar linting 
+# Un programa que lee tu código y te dice:
+# "Aquí tienes un error" o "Aquí puedes mejorar esto"
+# SIN ejecutar el código.
+# Es como un corrector ortográfico, pero para código.
+# Ruff es un linter + formateador de Python.
+# Escrito en Rust → es extremadamente rápido (10-100x más rápido que alternativas).
 ruff check src/ tests/
 ruff format src/ tests/
 
 # 7. Verificar tipos
+# Mypy es un verificador de tipos estáticos para Python.
+# Lee las anotaciones de tipo y verifica que sean correctas
+# SIN ejecutar el código.
+# Python es dinámico → los errores de tipo aparecen en runtime.
+# Mypy los detecta ANTES de ejecutar → antes de que lleguen a producción.
 mypy src/
 
 # 8. Arrancar la aplicación
