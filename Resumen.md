@@ -21,29 +21,29 @@ ENTRYPOINT ["./scripts/entrypoint.sh"]
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    DECISIONES DE DISEÑO                          │
+│                    DECISIONES DE DISEÑO                         │
 ├─────────────────────────┬───────────────────────────────────────┤
-│ pydantic-settings        │ ✅ USAR                               │
-│                          │ Validación automática de env vars     │
-│                          │ Type safety completo                  │
-│                          │ SecretStr para keys sensibles         │
-│                          │ Soporte .env nativo                   │
+│ pydantic-settings        │ ✅ USAR                             │
+│                          │ Validación automática de env vars    │
+│                          │ Type safety completo                 │
+│                          │ SecretStr para keys sensibles        │
+│                          │ Soporte .env nativo                  │
 ├─────────────────────────┼───────────────────────────────────────┤
-│ @lru_cache en            │ ✅ USAR (Singleton pattern)           │
-│ get_settings()           │ Una sola lectura del entorno          │
-│ build_graph()            │ Compilación del grafo solo 1 vez      │
-│ get_agent_service()      │ Reutilización de instancias           │
+│ @lru_cache en            │ ✅ USAR (Singleton pattern)         │
+│ get_settings()           │ Una sola lectura del entorno         │
+│ build_graph()            │ Compilación del grafo solo 1 vez     │
+│ get_agent_service()      │ Reutilización de instancias          │
 ├─────────────────────────┼───────────────────────────────────────┤
-│ tenacity                 │ ✅ USAR con configuración precisa     │
-│                          │ retry_if_exception_type → solo        │
-│                          │ reintenta errores recuperables        │
-│                          │ wait_exponential → evita sobrecargar  │
-│                          │ stop_after_attempt(3) → límite claro  │
+│ tenacity                 │ ✅ USAR con configuración precisa   │
+│                          │ retry_if_exception_type → solo       │
+│                          │ reintenta errores recuperables       │
+│                          │ wait_exponential → evita sobrecargar │
+│                          │ stop_after_attempt(3) → límite claro │
 ├─────────────────────────┼───────────────────────────────────────┤
-│ structlog                │ ✅ USAR                               │
-│                          │ JSON en producción (ELK/Datadog)      │
-│                          │ Context vars para request tracing     │
-│                          │ Formato legible en desarrollo         │
+│ structlog                │ ✅ USAR                             │
+│                          │ JSON en producción (ELK/Datadog)     │
+│                          │ Context vars para request tracing    │
+│                          │ Formato legible en desarrollo        │
 └─────────────────────────┴───────────────────────────────────────┘
 ```
 
