@@ -317,3 +317,105 @@ retry intenta 2 veces → falla
 ---
 # ► LOGGING ◄
 `structlog` es una librería de Python para hacer logging estructurado, es decir, logs en formato clave–valor (JSON u otros) en lugar de texto plano.
+
+## 📦 logging_config.py
+
+```python
+import logging
+import structlog
+import sys
+
+
+def setup_logging(env: str = "dev"):
+    timestamper = structlog.processors.TimeStamper(fmt="iso")
+
+    # level = logging.INFO if env == "prod" else logging.DEBUG
+
+    shared_processors = [
+        structlog.contextvars.merge_contextvars,   # request_id
+        structlog.processors.add_logger_name, 
+        structlog.processors.add_log_level,        # level
+    ]
+
+    if env != "prod":  # Agregar solo a dev porque es costoso en procesamiento
+        shared_processors.append(
+            structlog.processors.CallsiteParameterAdder(
+                parameters=[
+                    structlog.processors.CallsiteParameter.FILENAME,
+                    structlog.processors.CallsiteParameter.LINENO,
+                ]
+            )
+        )
+
+    shared_processors += [
+        structlog.processors.StackInfoRenderer(), # stack
+        structlog.processors.format_exc_info,     # exceptions
+        timestamper,                              # timestamp
+    ]
+
+    if env == "prod":
+        processors = shared_processors + [
+            structlog.processors.JSONRenderer()
+        ]
+    else:
+        processors = shared_processors + [
+            structlog.dev.ConsoleRenderer()
+        ]
+
+    structlog.configure(
+        processors=processors,
+        logger_factory=structlog.stdlib.LoggerFactory(),
+        wrapper_class=structlog.stdlib.BoundLogger,  # 🔥 importante
+        cache_logger_on_first_use=True,
+    )
+
+    logging.basicConfig(
+        format="%(message)s",
+        stream=sys.stdout,
+        level=logging.INFO,
+    )
+```
+
+## 🟢 main.py (punto de entrada)
+```python
+from logging_config import setup_logging
+import structlog
+
+setup_logging(env="dev")
+
+structlog.contextvars.bind_contextvars(
+    service="chatbot",
+    env="dev"
+)
+```
+👉 Aquí se configuras TODO
+
+## 🟡 Otros módulos
+```python
+import structlog
+
+log = structlog.get_logger(__name__)
+```
+👉 Este logger:
+- ya usa la configuración global
+- no necesita volver a configurarse
+
+## 🧪 Uso real
+```python
+log.info(
+    "llm_router_decision",
+    intent="medios_pago",
+    confidence=0.9,
+    action="execute"
+)
+```
+
+## 🧠 IDEA CLAVE
+
+- 👉 setup_logging() se ejecuta una sola vez en toda la aplicación
+- 👉 get_logger(__name__) se usa en cada módulo
+
+
+```python
+
+```
