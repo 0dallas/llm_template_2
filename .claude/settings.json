@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m pytest tests/unit/test_graph.py -v)",
+      "Bash(uv run *)",
+      "PowerShell(cd \"c:\\\\Users\\\\wrfig\\\\OneDrive\\\\Documentos\\\\Python\\\\llm_template_2\"; \\(Get-Command python3 -ErrorAction SilentlyContinue\\).Source; \\(Get-Command py -ErrorAction SilentlyContinue\\).Source; \\(Get-Command uv -ErrorAction SilentlyContinue\\).Source; \\(Get-Command poetry -ErrorAction SilentlyContinue\\).Source)",
+      "Read(//c/Users/wrfig/AppData/Local/pypoetry/Cache/virtualenvs/**)",
+      "PowerShell($venv = \"C:\\\\Users\\\\wrfig\\\\AppData\\\\Local\\\\pypoetry\\\\Cache\\\\virtualenvs\\\\my-genai-app-qVQQDYSz-py3.11\"; & \"$venv\\\\Scripts\\\\python.exe\" -c \"import pytest; print\\('pytest ok'\\)\" 2>&1)",
+      "PowerShell($venv = \"C:\\\\Users\\\\wrfig\\\\AppData\\\\Local\\\\pypoetry\\\\Cache\\\\virtualenvs\\\\my-genai-app-qVQQDYSz-py3.11\"; & \"$venv\\\\Scripts\\\\pip.exe\" install pytest pytest-asyncio pytest-cov pytest-mock structlog pydantic pydantic-settings langchain-core langgraph fastapi uvicorn 2>&1 | Select-Object -Last 15)",
+      "PowerShell($venv = \"C:\\\\Users\\\\wrfig\\\\AppData\\\\Local\\\\pypoetry\\\\Cache\\\\virtualenvs\\\\my-genai-app-qVQQDYSz-py3.11\"; & \"$venv\\\\Scripts\\\\pip.exe\" install -e \"c:\\\\Users\\\\wrfig\\\\OneDrive\\\\Documentos\\\\Python\\\\llm_template_2\" 2>&1 | Select-Object -Last 10)",
+      "PowerShell($venv = \"C:\\\\Users\\\\wrfig\\\\AppData\\\\Local\\\\pypoetry\\\\Cache\\\\virtualenvs\\\\my-genai-app-qVQQDYSz-py3.11\"; Set-Location \"c:\\\\Users\\\\wrfig\\\\OneDrive\\\\Documentos\\\\Python\\\\llm_template_2\"; $env:OPENAI_API_KEY=\"sk-test-fake-key\"; $env:OPENWEATHER_API_KEY=\"fake-weather-key\"; $env:ENVIRONMENT=\"test\"; & \"$venv\\\\Scripts\\\\pytest.exe\" tests/unit/test_tools.py tests/unit/test_agents.py -v --no-cov 2>&1)",
+      "PowerShell($venv = \"C:\\\\Users\\\\wrfig\\\\AppData\\\\Local\\\\pypoetry\\\\Cache\\\\virtualenvs\\\\my-genai-app-qVQQDYSz-py3.11\"; & \"$venv\\\\Scripts\\\\pip.exe\" install -e \"c:\\\\Users\\\\wrfig\\\\OneDrive\\\\Documentos\\\\Python\\\\llm_template_2\" --no-deps 2>&1 | Select-Object -Last 5)",
+      "PowerShell($venv = \"C:\\\\Users\\\\wrfig\\\\AppData\\\\Local\\\\pypoetry\\\\Cache\\\\virtualenvs\\\\my-genai-app-qVQQDYSz-py3.11\"; Set-Location \"c:\\\\Users\\\\wrfig\\\\OneDrive\\\\Documentos\\\\Python\\\\llm_template_2\"; $env:OPENAI_API_KEY=\"sk-test-fake-key\"; $env:ENVIRONMENT=\"test\"; & \"$venv\\\\Scripts\\\\pytest.exe\" tests/unit/test_tools.py tests/unit/test_agents.py -v --no-cov 2>&1)"
+    ]
+  }
+}
